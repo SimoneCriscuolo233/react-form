@@ -28,6 +28,9 @@ function App() {
     setArticles([...articles, newArticle]);
     setNewTitle("");
   };
+  const handleDelete = (id) => {
+    setArticles(articles.filter(article => article.id !== id));
+  };
 
   return (
     <div className="App">
@@ -37,15 +40,15 @@ function App() {
         <ul className="list-unstyled">
           {articles.map(article => (
             <li key={article.id}>
-              <div className="card py-3 ps-3 d-flex ">
+              <div className="card p-3 d-flex ">
                 <div className="row justify-space-between">
                   <div className="col-11">
                     <span>
                       {article.title}
                     </span>
                   </div>
-                  <div className="col-1 ">
-                    <button className="btn btn-danger">X</button>
+                  <div className="col-1">
+                    <button className="btn btn-danger" onClick={() => handleDelete(article.id)}>X</button>
                   </div>
                 </div>
 
