@@ -8,7 +8,27 @@ function App() {
     { id: 4, title: "Introduzione a React: Cos'è e Come Funziona la Libreria di Meta: (da Hostinger) " },
     { id: 5, title: "JSX e Pura JavaScript: Sintassi nei Componenti React: (da Wikipedia) " }
   ]);
-  // React: cosa è, come funziona e perché è importante per lo sviluppo web articolo di prova per il form
+  // React: cosa è, come funziona e perché è importante per lo sviluppo web. <--- Articolo di prova per il form
+
+  const [newTitle, setNewTitle] = useState("");
+  const newId = (articles.length - 1) + 1;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (newTitle === "") {
+      alert("⚠️ Inserisci un titolo valido per l'articolo!");
+      return;
+    }
+
+    const newArticle = {
+      id: newId,
+      title: newTitle
+    };
+
+    setArticles([...articles, newArticle]);
+    setNewTitle("");
+  };
+
   return (
     <div className="App">
       <div className="container">
@@ -33,6 +53,18 @@ function App() {
             </li>
           ))}
         </ul>
+        <form onSubmit={handleSubmit} className="mb-4">
+          <div className="input-group">
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              className="form-control"
+              placeholder="Enter new article title"
+            />
+            <button type="submit" className="btn btn-primary">Add</button>
+          </div>
+        </form>
       </div >
     </div >
   );
